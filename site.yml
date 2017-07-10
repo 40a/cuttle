@@ -126,13 +126,25 @@
   environment: "{{ env_vars|default({}) }}"
   any_errors_fatal: true
 
-- name: elk
-  hosts: elk
+- name: elasticsearch
+  hosts: elk:elasticsearch
   roles:
     - role: elk/elasticsearch
       tags: ['elasticsearch']
+  environment: "{{ env_vars|default({}) }}"
+  any_errors_fatal: true
+
+- name: logstash 
+  hosts: elk:logstash
+  roles:
     - role: elk/logstash
       tags: ['logstash']
+  environment: "{{ env_vars|default({}) }}"
+  any_errors_fatal: true
+   
+- name: kibana 
+  hosts: elk:kibana
+  roles:
     - role: elk/kibana
       tags: ['kibana']
   environment: "{{ env_vars|default({}) }}"

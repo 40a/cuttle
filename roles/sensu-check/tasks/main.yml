@@ -1,8 +1,7 @@
 ---
-- name: delete antiquated ursula-monitoring serverspec
-  file:
-    path: /etc/serverspec/spec/localhost/monitoring-common_spec.rb
-    state: absent
+- name: include vars from sensu-common
+  include_vars:
+    file: ../sensu-common/defaults/main.yml
 
 - name: sensu checks directory
   file: dest=/etc/sensu/conf.d/checks
